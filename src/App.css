@@ -1,38 +1,168 @@
-.App {
+.app {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+  background-color: #f4f4f4;
   min-height: 100vh;
+  font-family: 'Roboto', sans-serif;
+}
+
+.header {
+  background-color: #16a8b1;
+  height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: 14px;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 50px auto 0;
+  width: 1200px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 611px;
+  padding-left: 40px;
+}
+
+.graph-input {
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+}
+
+.graph-input label,
+.graph-directed label,
+.adjacents p,
+.adjacents-list p {
+  font-weight: 500;
+  color: #585858;
+  margin: 0 0 5px;
+}
+
+.graph-input textarea {
+  width: 260px;
+  height: 444px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+  border: none;
+}
+
+.graph-directed {
+  margin-top: 15px;
+}
+
+.graph-directed label {
+  margin-left: 5px;
+}
+
+.result-btn {
+  width: 280px;
+  padding: 15px 20px;
+  background: #16a8b1;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 14px;
+  margin: 20px 0;
+}
+
+.result-title,
+.graph-table-title {
+  color: #585858;
+  font-size: 22px;
+  margin: 0 0 5px;
+}
+
+.result-container {
+  width: 240px;
+  height: 251px;
+  background: #ffffff;
+  border-radius: 8px;
+  resize: none;
+  padding: 10px 20px;
+  border: none;
+  text-align: left;
+  font-size: 14px;
+  overflow: scroll;
+}
+
+.graph-table {
+  width: 260px;
+  height: 251px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 10px;
+  resize: none;
+  overflow: scroll;
+}
+
+.table {
+  display: flex;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  height: 251px;
+  font-size: 18px;
+}
+
+.table tbody td {
+  padding: 5px 10px;
+}
+
+.table tbody td:first-child,
+.table tbody tr:first-child {
+  background-color: #16a8b1;
+  color: white;
+}
+
+.adjacents,
+.adjacents-list {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.adjacents .vertix,
+.adjacents-list .vertix {
+  margin: 10px 0;
+}
+
+.adjacents .vertix label,
+.adjacents-list .vertix label {
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.adjacents .vertix input,
+.adjacents-list .vertix input {
+  width: 80px;
+  height: 25px;
+  border: none;
+  border-radius: 5px;
+}
+
+.check-btn {
+  width: 180px;
+  padding: 10px 20px;
+  background: #16a8b1;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 800;
+  font-size: 14px;
+  margin: 20px 0;
 }
