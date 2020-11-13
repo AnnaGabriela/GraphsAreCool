@@ -3,7 +3,9 @@ import './App.css';
 
 function App() {
   const [directed, setDirected] = useState(true);
-  const [graphInput, setGraphInput] = useState('');
+  const [graphInput, setGraphInput] = useState(
+    `a\nb\nc\nd\na b 3\na c 2\nb d 5\nc b 1`
+  );
   const [result, setResult] = useState(false);
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
@@ -26,6 +28,7 @@ function App() {
   useEffect(() => {
     if (result) {
       getMatrix();
+      console.log(getShortestPath('a', 'd'), 'distance');
     }
   }, [result]);
 
@@ -129,7 +132,7 @@ function App() {
       }
       matrix.push(line);
     }
-    console.table(matrix);
+    // console.table(matrix);
     setMatrix(matrix);
   };
 
@@ -160,6 +163,68 @@ function App() {
     });
     setAdjacents(isDirected ? adjNodes : [...adjNodes.in, adjNodes.out]);
     console.log(adjacents, 'adj');
+  };
+
+  const getShortestPath = (source, destination) => {
+    const visitedNodes = [];
+    let currentNode = source;
+    let nodeDistances = {};
+    const nodesShifted = [...nodes];
+    let smallestNode = '';
+    nodesShifted.shift();
+
+    nodesShifted.forEach((node) => {
+      if (node === source) {
+        nodeDistances[node] = { node, distance: 0 };
+      } else {
+        nodeDistances[node] = null;
+      }
+    });
+
+    nodesShifted.forEach(() => {
+      const currentNodeEdges = edges.filter(
+        (edge) => edge.from === currentNode
+      );
+      currentNodeEdges.forEach((edge) => {
+        if (!nodeDistances[edge.to]) {
+          nodeDistances[edge.to] = {
+            node: edge.from,
+            distance: nodeDistances[currentNode].distance + edge.distance,
+          };
+        } else {
+          const currNodeDistance =
+            nodeDistances[currentNode].distance + edge.distance;
+          if (currNodeDistance < nodeDistances[edge.to].distance) {
+            nodeDistances[edge.to] = {
+              node: currentNode,
+              distance: currNodeDistance,
+            };
+          }
+        }
+      });
+      visitedNodes.push(currentNode);
+
+      const sortedNodeDistances = Object.entries(nodeDistances).sort((a, b) => {
+        if (a[1] !== null && b[1] !== null) {
+          return a[1].distance - b[1].distance;
+        }
+      });
+
+      for (let i = 0; i <= sortedNodeDistances.length; i++) {
+        if (
+          sortedNodeDistances[i] &&
+          !visitedNodes.includes(sortedNodeDistances[i][0])
+        ) {
+          smallestNode = sortedNodeDistances[i][0];
+          break;
+        }
+      }
+      currentNode = smallestNode;
+    });
+    console.log(nodeDistances);
+    return nodeDistances[destination]
+      ? nodeDistances[destination].distance
+      : -1;
   };
 
   const firstColumn = (
